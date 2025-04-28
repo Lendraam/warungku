@@ -63,22 +63,22 @@ export default function CartPage() {
 
   return (
     <section className="min-h-screen p-4">
-      <h1 className="text-3xl font-bold text-center mb-8">Keranjang Belanja</h1>
+      <h1 className="text-3xl font-bold text-center mb-8">Shopping Cart</h1>
 
       {paymentSuccessful ? (
         <div className="text-center">
-          <h2 className="text-2xl font-semibold text-green-600 mb-4">Pembayaran Berhasil!</h2>
-          <p className="text-lg">Terima kasih telah berbelanja. Pesanan Anda sedang diproses.</p>
+          <h2 className="text-2xl font-semibold text-green-600 mb-4">Payment Successful!</h2>
+          <p className="text-lg">Thank you for shopping. Your order is being processed.</p>
           <Link href="/products">
             <button className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-              Kembali ke Katalog Produk
+              Back to Product Catalog
             </button>
           </Link>
         </div>
       ) : (
         <>
           {cartItems.length === 0 ? (
-            <p className="text-center text-gray-600">Keranjang belanja Anda kosong</p>
+            <p className="text-center text-gray-600">Your cart is empty</p>
           ) : (
             <div className="space-y-4">
               {cartItems.map((item, index) => (
@@ -86,7 +86,7 @@ export default function CartPage() {
                   <img src={item.image} alt={item.title} className="w-24 h-24 object-cover mb-4 sm:mb-0" />
                   <div className="flex-1 sm:ml-4">
                     <h2 className="text-xl font-semibold">{item.title}</h2>
-                    <p className="text-gray-600">Rp {item.price}</p>
+                    <p className="text-gray-600">${item.price}</p>
                     <div className="flex items-center space-x-2 mt-2">
                       <button
                         onClick={() => handleQuantityChange(index, item.quantity - 1)}
@@ -114,13 +114,13 @@ export default function CartPage() {
                     onClick={() => handleRemoveItem(index)}
                     className="text-red-600 hover:text-red-800 mt-4 sm:mt-0"
                   >
-                    Hapus
+                    Remove
                   </button>
                 </div>
               ))}
 
               <div className="flex justify-between mt-6">
-                <h3 className="text-xl font-semibold">Total: Rp {calculateTotal()}</h3>
+                <h3 className="text-xl font-semibold">Total: ${calculateTotal().toFixed(2)}</h3>
               </div>
 
               <div className="mt-6 text-center">
@@ -128,7 +128,7 @@ export default function CartPage() {
                   onClick={handlePayment}
                   className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
                 >
-                  Bayar Sekarang
+                  Pay Now
                 </button>
               </div>
             </div>
